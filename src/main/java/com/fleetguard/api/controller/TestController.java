@@ -8,6 +8,6 @@ public class TestController {
 
     @GetMapping("/api/test")
     public String testEndpoint() {
-        return "La API de Fleetguard está funcionando correctamente.";
+        return "La API de Fleetguard está funcionando correctamente y con despliegue continuo.";
     }
 }
