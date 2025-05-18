@@ -38,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody SignUp signupDTO) {
-        Administrator admin = new Administrator(signupDTO.getUsername(), signupDTO.getPassword());
+        Administrator admin = new Administrator(signupDTO.getName(), signupDTO.getUsername(), signupDTO.getPassword());
         userDetailsManager.createUser(admin);
 
         Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(admin, signupDTO.getPassword(), admin.getAuthorities());

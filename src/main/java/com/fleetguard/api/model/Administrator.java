@@ -28,7 +28,7 @@ public class Administrator implements UserDetails {
         this.password = password;
     }
 
-    public Administrator( @NotNull String username, @NotNull String password){
+    public Administrator(@NotNull String username, @NotNull String password){
         this.username = username;
         this.password = password;
     }

@@ -7,6 +7,7 @@ import lombok.Setter;
 public class SignUp {
     private String username;
     private String password;
+    private String name;
 
     public SignUp(){}
 
@@ -15,6 +16,14 @@ public class SignUp {
         this.username = username;
         this.password = password;
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
