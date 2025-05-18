@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface AdministratorRepository extends CrudRepository<Administrator, Integer> {
     Optional<Administrator> findByUsername(String username);
+    boolean existsByUsername(String username);
+    void deleteByUsername(String username);
 }
