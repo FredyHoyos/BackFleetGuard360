@@ -12,12 +12,11 @@ import java.util.stream.Collectors;
 public class AdministratorDTO {
     private String id;
     private String username;
-    private String name;
 
-    public AdministratorDTO(String id, String username, String name) {
+    public AdministratorDTO(String id, String username) {
         this.id = id;
         this.username = username;
-        this.name = name;
+
     }
 
     public static List<AdministratorDTO> from(List<Administrator> admins) {
@@ -25,7 +24,6 @@ public class AdministratorDTO {
                 .map(admin -> AdministratorDTO.builder()
                         .id(String.valueOf(admin.getId()))
                         .username(admin.getUsername())
-                        .name(admin.getName())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -1,0 +1,1 @@
+ALTER TABLE administrator ALTER name DROP NOT NULL;

@@ -6,23 +6,21 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-
+import org.springframework.core.convert.converter.Converter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
@@ -35,7 +33,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Slf4j
 public class WebSecurity {
     @Autowired
-    JWTtoAdminConverter jwtToAdminConverter;
+    JWTtoUserConverter jwtToUserConverter;
 
     @Autowired
     KeyUtils keyUtils;
@@ -50,14 +48,14 @@ public class WebSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/auth/*", "/admin/register").permitAll()
+                        .requestMatchers("/api/auth/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .httpBasic(basic -> basic.disable())
                 .oauth2ResourceServer((oauth2) ->
-                        oauth2.jwt((jwt) -> jwt.jwtAuthenticationConverter(jwtToAdminConverter))
+                        oauth2.jwt((jwt) -> jwt.jwtAuthenticationConverter(jwtToUserConverter))
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling((exceptions) -> exceptions
@@ -105,7 +103,7 @@ public class WebSecurity {
     @Qualifier("jwtRefreshTokenAuthProvider")
     JwtAuthenticationProvider jwtRefreshTokenAuthProvider() {
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider(jwtRefreshTokenDecoder());
-        provider.setJwtAuthenticationConverter(jwtToAdminConverter);
+        provider.setJwtAuthenticationConverter(jwtToUserConverter);
         return provider;
     }
 

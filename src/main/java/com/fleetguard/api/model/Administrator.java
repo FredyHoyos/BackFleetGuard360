@@ -14,7 +14,6 @@ public class Administrator implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_seq_gen")
     @SequenceGenerator(name = "admin_seq_gen", sequenceName = "administrator_seq", allocationSize = 50)
     private Long id;
-    @NotNull
     private String name;
     @NotNull
     private String username;
@@ -23,7 +22,7 @@ public class Administrator implements UserDetails {
 
     public Administrator() {}
 
-    public Administrator(@NotNull String name, @NotNull String username, @NotNull String password){
+    public Administrator(String name, @NotNull String username, @NotNull String password){
         this.name = name;
         this.username = username;
         this.password = password;
