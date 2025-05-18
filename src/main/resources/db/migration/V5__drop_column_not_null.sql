@@ -1,0 +1,1 @@
+ALTER TABLE driver ALTER photo DROP NOT NULL;

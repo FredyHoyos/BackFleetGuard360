@@ -50,7 +50,6 @@ public class Driver implements UserDetails {
 
     private Gender sex;
 
-    @NotNull
     @Lob
     @Column(name = "photo")
     private byte[] photo;
@@ -59,7 +58,7 @@ public class Driver implements UserDetails {
 
     public Driver(@NotNull String name, @NotNull String username,@NotNull DocumentType documentType, @NotNull String documentNumber, @NotNull String rol,
                   @NotNull String address, @NotNull Date birthDate, @NotNull String phoneNumber, @NotNull String email,
-                  @NotNull String password, Gender sex, @NotNull byte[] photo) {
+                  @NotNull String password, Gender sex, byte[] photo) {
 
         this.name = name;
         this.username = username;
