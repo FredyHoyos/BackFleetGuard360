@@ -5,6 +5,7 @@ import java.util.Collections;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -68,7 +69,7 @@ public class Administrator implements UserDetails {
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     public boolean isAccountNonExpired() {
