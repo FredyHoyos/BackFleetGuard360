@@ -16,7 +16,7 @@ public class DocumentTypeController {
         this.repository = repository;
     }
 
-    @GetMapping("/doc-type")
+    @GetMapping("/api/doc-type")
     public @ResponseBody Iterable <DocumentType> getAllDocumentType(){
         return repository.findAll();
     }

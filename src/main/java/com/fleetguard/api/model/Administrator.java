@@ -1,0 +1,90 @@
+package com.fleetguard.api.model;
+import java.util.Collection;
+import java.util.Collections;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+@Entity
+public class Administrator implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_seq_gen")
+    @SequenceGenerator(name = "admin_seq_gen", sequenceName = "administrator_seq", allocationSize = 50)
+    private Long id;
+    @NotNull
+    private String name;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
+
+    public Administrator() {}
+
+    public Administrator(@NotNull String name, @NotNull String username, @NotNull String password){
+        this.name = name;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Administrator( @NotNull String username, @NotNull String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public boolean isEnabled() {
+        return true;
+    }
+
+}
