@@ -27,6 +27,7 @@ import java.util.Collections;
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
+    @Qualifier("adminUserManager")
     UserDetailsManager userDetailsManager;
     @Autowired
     TokenGenerator tokenGenerator;

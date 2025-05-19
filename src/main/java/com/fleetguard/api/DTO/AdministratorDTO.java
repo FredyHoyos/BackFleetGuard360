@@ -13,10 +13,11 @@ public class AdministratorDTO {
     private String id;
     private String username;
 
+    public AdministratorDTO(){}
+
     public AdministratorDTO(String id, String username) {
         this.id = id;
         this.username = username;
-
     }
 
     public static List<AdministratorDTO> from(List<Administrator> admins) {
