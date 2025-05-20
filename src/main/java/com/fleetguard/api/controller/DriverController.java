@@ -33,14 +33,14 @@ public class DriverController {
         return repository.save(driver);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public @ResponseBody Driver updateDriver(@PathVariable int id, @Valid @RequestBody DriverDTO newDriver) {
         Driver driver = driverMapper.toModel(newDriver);
         driver.setId(Long.valueOf(id));
         return repository.save(driver);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public @ResponseBody void deleteDriver(@PathVariable int id) {
         repository.deleteById(id);
     }
