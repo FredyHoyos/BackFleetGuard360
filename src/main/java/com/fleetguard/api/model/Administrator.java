@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class Administrator implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_seq_gen")
-    @SequenceGenerator(name = "admin_seq_gen", sequenceName = "administrator_seq", allocationSize = 50)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
     @NotNull

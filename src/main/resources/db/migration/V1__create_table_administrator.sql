@@ -5,5 +5,3 @@ CREATE TABLE administrator (
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
-
-CREATE SEQUENCE administrator_seq START WITH 1 INCREMENT BY 1;

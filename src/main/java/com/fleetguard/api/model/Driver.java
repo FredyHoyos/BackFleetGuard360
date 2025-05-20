@@ -51,7 +51,7 @@ public class Driver implements UserDetails {
     private Gender sex;
 
     @Lob
-    @Column(name = "photo")
+    @Column(name = "photo", columnDefinition="bytea")
     private byte[] photo;
 
     public Driver() { }

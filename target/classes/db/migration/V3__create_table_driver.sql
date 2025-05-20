@@ -1,20 +1,5 @@
-CREATE TABLE driver(
-    id BIGINT NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    FK_document_type BIGINT NOT NULL,
-    CONSTRAINT fk_driver_document_type
-        FOREIGN KEY (FK_document_type)
-        REFERENCES document_type(id),
-    document_number VARCHAR(255) NOT NULL,
-    rol VARCHAR(20) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    birth_date DATE NOT NULL,
-    phone_number VARCHAR(20),
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    sex VARCHAR(10) NOT NULL,
-    photo BYTEA,
-    PRIMARY KEY(id)
-);
-CREATE SEQUENCE driver_seq START WITH 1 INCREMENT BY 50;
+alter table if exists document_type alter column name set data type varchar(255);
+create table driver (id bigint not null, address varchar(255) not null, birth_date timestamp(6) not null, document_number varchar(255) not null, email varchar(255) not null, name varchar(255) not null, password varchar(255) not null, phone_number varchar(255) not null, photo bytea, rol varchar(255) not null, sex smallint check (sex between 0 and 2), username varchar(255) not null, fk_document_type integer not null, primary key (id));
+create sequence administrator_seq start with 1 increment by 50;
+create sequence driver_seq start with 1 increment by 50;
+alter table if exists driver add constraint FKimq80ign0vkhnodrviwnbav5w foreign key (fk_document_type) references document_type;
