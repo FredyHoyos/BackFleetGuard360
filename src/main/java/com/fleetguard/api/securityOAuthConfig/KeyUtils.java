@@ -119,11 +119,13 @@ public class KeyUtils {
             keyPairGenerator.initialize(2048);
             keyPair = keyPairGenerator.generateKeyPair();
 
+            ensureParentDirectoryExists(publicKeyPath);
             try (FileOutputStream fos = new FileOutputStream(publicKeyPath)) {
                 X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyPair.getPublic().getEncoded());
                 fos.write(wrapPem("PUBLIC KEY", keySpec.getEncoded()).getBytes());
             }
 
+            ensureParentDirectoryExists(privateKeyPath);
             try (FileOutputStream fos = new FileOutputStream(privateKeyPath)) {
                 PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyPair.getPrivate().getEncoded());
                 fos.write(wrapPem("PRIVATE KEY", keySpec.getEncoded()).getBytes());
@@ -134,6 +136,14 @@ public class KeyUtils {
 
         return keyPair;
     }
+    private void ensureParentDirectoryExists(String filePath) {
+    File file = new File(filePath);
+    File parentDir = file.getParentFile();
+    if (parentDir != null && !parentDir.exists()) {
+        parentDir.mkdirs();
+    }
+}
+
     public RSAPublicKey getAccessTokenPublicKey() {
         return (RSAPublicKey) getAccessTokenKeyPair().getPublic();
     };
