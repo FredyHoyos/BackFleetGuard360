@@ -12,19 +12,18 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        
+
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
-          
+
       - name: Cache Maven dependencies
         uses: actions/cache@v3
         with:
@@ -32,16 +31,23 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-            
+
       - name: Build with Maven
         run: mvn clean install --no-transfer-progress
-        
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          PATH_PRIVATE: ${{ secrets.PATH_PRIVATE }}
+          PATH_PUBLIC: ${{ secrets.PATH_PUBLIC }}
+          PATH_REFRESH_PRIVATE: ${{ secrets.PATH_REFRESH_PRIVATE }}
+          PATH_REFRESH_PUBLIC: ${{ secrets.PATH_REFRESH_PUBLIC }}
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
