@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      PATH_PRIVATE: /app/keys/private_key.pem
+      PATH_PUBLIC: /app/keys/public_key.pem
+      PATH_REFRESH_PRIVATE: /app/keys/refresh_private_key.pem
+      PATH_REFRESH_PUBLIC: /app/keys/refresh_public_key.pem
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./keys:/app/keys
