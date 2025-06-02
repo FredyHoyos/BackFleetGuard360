@@ -86,11 +86,9 @@ en resumen, todas tus credenciales para que el backend y la db estén conectadas
 Una vez creado el archivo copie y pegue la siguiente sección cambiando el contenido por sus credenciales
 
 ```
-DB_HOST=your_host
-DB_PORT=your_port
-DATA_BASE=your_db_name
-DB_USERNAME=your_db_username
-DB_PWD=your_password
+POSTGRES_DB=your_db_name
+POSTGRES_DB_USER=your_db_username
+POSTGRES_PWD=your_password
 PATH_PRIVATE=/ruta/al/archivo/private_key.pem
 PATH_PUBLIC=/ruta/al/archivo/public_key.pem
 PATH_REFRESH_PRIVATE=/ruta/al/archivo/refresh_private_key.pem
