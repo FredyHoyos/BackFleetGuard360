@@ -5,6 +5,7 @@ import com.fleetguard.api.exception.EntityNotFoundException;
 import com.fleetguard.api.mapper.DriverMapper;
 import com.fleetguard.api.model.Driver;
 import com.fleetguard.api.repository.DriverRepository;
+import com.fleetguard.api.service.PhotoStorageService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class DriverController {
     private DriverRepository repository;
     @Autowired
     private DriverMapper driverMapper;
+    @Autowired
+    private PhotoStorageService photoStorageService;
 
     DriverController() {}
     DriverController(DriverRepository repository, DriverMapper driverMapper) {
@@ -51,15 +54,17 @@ public class DriverController {
         repository.deleteById(id);
     }
 
-   // @PostMapping("/{id}/photo")
-   // public ResponseEntity<String> uploadPhoto(@PathVariable int id, @RequestParam("file") MultipartFile file) {
-   //     try{
-   //         Driver driver = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Driver not found" + id));
-   //         driver.setPhoto(file.getBytes());
-   //         repository.save(driver);
-   //         return ResponseEntity.ok().body("Successfully uploaded photo.");
-   //     } catch (IOException e) {
-   //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while uploading photo.");
-   //     }
-   // }
+    @PostMapping("/photo/{id}")
+    public @ResponseBody String uploadPhoto(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+        try{
+            Driver driver = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Driver not found" + id));
+            String relativePath = photoStorageService.savePhoto(file, Long.valueOf(id), driver.getUsername());
+            driver.setPhoto(relativePath);
+            repository.save(driver);
+
+            return "Successfully uploaded photo.";
+        } catch (IOException e) {
+            return "Error while uploading photo.";
+        }
+    }
 }
