@@ -1,2 +1,0 @@
-ALTER TABLE driver DROP COLUMN photo;
-ALTER TABLE driver ADD COLUMN photo BYTEA;
