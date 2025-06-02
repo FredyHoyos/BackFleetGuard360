@@ -1,7 +1,6 @@
 package com.fleetguard.api.DTO;
 
 import com.fleetguard.api.model.Driver;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 

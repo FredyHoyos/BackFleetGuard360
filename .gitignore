@@ -7,6 +7,8 @@ HELP.md
 ### Local Configuration ###
 .env
 
+/keys
+
 target/
 
 ### STS ###
