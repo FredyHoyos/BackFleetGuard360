@@ -1,17 +1,10 @@
-version: '3.8'
 
 services:
-  app:
-    build: .
+  postgres:
+    image: 'postgres:latest'
     environment:
-      DB_URL: ${DB_URL}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      PATH_PRIVATE: ${PATH_PRIVATE}
-      PATH_PUBLIC: ${PATH_PUBLIC}
-      PATH_REFRESH_PRIVATE: ${PATH_REFRESH_PRIVATE}
-      PATH_REFRESH_PUBLIC: ${PATH_REFRESH_PUBLIC}
+      - 'POSTGRES_DB=${POSTGRES_DB}'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PWD}'
+      - 'POSTGRES_USER=${POSTGRES_DB_USER}'
     ports:
-      - '8080:8080'
-    volumes:
-      - ./keys:/app/keys
+      - '5433:5432'

@@ -50,13 +50,15 @@ public class Driver implements UserDetails {
 
     private Gender sex;
 
-    private String photo;
+    @Lob
+    @Column(name="photo")
+    private byte[] photo;
 
     public Driver() { }
 
     public Driver(@NotNull String name, @NotNull String username,@NotNull DocumentType documentType, @NotNull String documentNumber, @NotNull String rol,
                   @NotNull String address, @NotNull Date birthDate, @NotNull String phoneNumber, @NotNull String email,
-                  @NotNull String password, Gender sex, String photo) {
+                  @NotNull String password, Gender sex, byte[] photo) {
 
         this.name = name;
         this.username = username;
@@ -162,11 +164,11 @@ public class Driver implements UserDetails {
         this.password = password;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
