@@ -36,8 +36,8 @@ jobs:
         run: mvn clean install --no-transfer-progress
         env:
           DB_URL: ${{ secrets.DB_URL }}
-          POSTGRES_DB_USER: ${{ secrets.DB_USER }}
-          POSTGRES_PWD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB_USER: ${{ secrets.POSTGRES_DB_USER }}
+          POSTGRES_PWD: ${{ secrets.POSTGRES_PWD }}
           PATH_PRIVATE: ${{ secrets.PATH_PRIVATE }}
           PATH_PUBLIC: ${{ secrets.PATH_PUBLIC }}
           PATH_REFRESH_PRIVATE: ${{ secrets.PATH_REFRESH_PRIVATE }}
