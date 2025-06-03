@@ -21,6 +21,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.springframework.http.MediaType;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/driver")
@@ -105,5 +107,20 @@ public class DriverController {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @GetMapping("/{id}/path")
+    public ResponseEntity<Map<String, String>> getPhotoPath(@PathVariable int id){
+        Driver dirver = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Driver not found" + id));
+        String photoPath = dirver.getPhoto();
+
+        if(photoPath == null || photoPath.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Map<String, String> response = new HashMap<>();
+        response.put("path", photoPath);
+
+        return ResponseEntity.ok(response);
     }
 }
