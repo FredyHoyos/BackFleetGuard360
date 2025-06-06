@@ -9,7 +9,7 @@ HELP.md
 
 /keys
 
-target/
+target/*
 
 ### STS ###
 .apt_generated
