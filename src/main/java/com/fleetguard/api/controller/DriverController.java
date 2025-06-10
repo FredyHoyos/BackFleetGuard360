@@ -23,6 +23,10 @@ import org.springframework.http.MediaType;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
+@CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"})
 
 @RestController
 @RequestMapping("/api/driver")
