@@ -1,5 +1,8 @@
 package com.fleetguard.api.controller;
 
+import com.fleetguard.api.DTO.CreateAssigmentDTO;
+import com.fleetguard.api.DTO.GetAssigmentDTO;
+import com.fleetguard.api.mapper.AssigmentMapper;
 import com.fleetguard.api.model.Assigment;
 import com.fleetguard.api.service.AssigmentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -7,14 +10,18 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Assigment")
 @RestController
 @RequestMapping("/api/assigment")
 public class AssigmentController {
     private final AssigmentService assigmentService;
+    private final AssigmentMapper assigmentMapper;
 
-    public AssigmentController(AssigmentService assigmentService) {
+    public AssigmentController(AssigmentService assigmentService, AssigmentMapper assigmentMapper) {
         this.assigmentService = assigmentService;
+        this.assigmentMapper = assigmentMapper;
     }
 
     @Operation(
@@ -23,7 +30,7 @@ public class AssigmentController {
             security = @SecurityRequirement(name = "bearerAuth")
     )
     @GetMapping("/all")
-    public Iterable<Assigment> getAll() {
+    public List<GetAssigmentDTO> getAll() {
         return assigmentService.getAllAssigments();
     }
 
@@ -33,7 +40,7 @@ public class AssigmentController {
             security = @SecurityRequirement(name = "bearerAuth")
     )
     @PostMapping("/register")
-    public @ResponseBody Assigment register(@RequestBody Assigment assigment) {
+    public @ResponseBody GetAssigmentDTO register(@RequestBody CreateAssigmentDTO assigment) {
         return assigmentService.createAssigment(assigment);
     }
 
@@ -43,8 +50,8 @@ public class AssigmentController {
             security = @SecurityRequirement(name = "bearerAuth")
     )
     @PutMapping("/{id}")
-    public @ResponseBody Assigment update(@PathVariable int id, @RequestBody Assigment assigment) {
-        return assigmentService.updateAssigment(id, assigment);
+    public @ResponseBody GetAssigmentDTO update(@PathVariable Long id, @RequestBody CreateAssigmentDTO dto) {
+        return assigmentService.updateAssigment(id, dto);
     }
 
     @Operation(

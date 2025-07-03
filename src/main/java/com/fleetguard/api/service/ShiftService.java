@@ -4,6 +4,10 @@ import com.fleetguard.api.model.Shift;
 import com.fleetguard.api.repository.ShiftRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +20,14 @@ public class ShiftService {
         this.shiftRepository = shiftRepository;
     }
 
-    public Iterable<Shift> getAllShifts() {
-        return Optional.of(shiftRepository.findAll())
-                .orElseThrow(() ->  new RuntimeException("No shift found"));
+    public List<Shift> getAllShifts() {
+        Iterable<Shift> shifts = shiftRepository.findAll();
+        List<Shift> shiftList = new ArrayList<>();
+        shifts.forEach(shiftList::add);
+        if (shiftList.isEmpty()) {
+            throw new RuntimeException("No shifts found");
+        }
+        return shiftList;
     }
 
     public Shift getShiftById(long id) {
@@ -69,11 +78,10 @@ public class ShiftService {
         }
     }
 
-    private int calculateWorkedHours(Date startDate, Date endDate) {
+    private int calculateWorkedHours(LocalTime startDate, LocalTime endDate) {
         if (startDate == null || endDate == null) {
             return 0;
         }
-        long diffInMillies = endDate.getTime() - startDate.getTime();
-        return (int) diffInMillies / (60 * 60 * 1000);
+        return (int) Duration.between(startDate, endDate).toHours();
     }
 }

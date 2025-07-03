@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public class Assigment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     @ManyToOne

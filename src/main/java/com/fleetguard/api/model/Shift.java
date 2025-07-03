@@ -1,9 +1,12 @@
 package com.fleetguard.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,24 +16,24 @@ public class Shift {
     private Long id;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime startTime;
 
     @NotNull
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
     @NotNull
     private String route;
 
     private int workedHoursInShift;
 
-    @OneToMany(mappedBy = "shift", cascade = CascadeType.ALL)
-    private List<Assigment> assigments;
+    @OneToMany(mappedBy = "shift", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Assigment> assigments = new ArrayList<>();
 
     public Shift(){}
 
@@ -42,27 +45,27 @@ public class Shift {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Date getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 

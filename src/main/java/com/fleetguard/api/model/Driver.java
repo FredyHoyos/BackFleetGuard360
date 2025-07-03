@@ -54,12 +54,6 @@ public class Driver implements UserDetails {
 
     private String photo;
 
-    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
-    private List<Assigment> primaryAssigments;
-
-    @OneToMany(mappedBy = "driver2", cascade = CascadeType.ALL)
-    private List<Assigment> secondaryAssigments;
-
     public Driver() { }
 
     public Driver(@NotNull String name, @NotNull String username,@NotNull DocumentType documentType, @NotNull String documentNumber, @NotNull String rol,
@@ -159,22 +153,6 @@ public class Driver implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Assigment> getPrimaryAssigments() {
-        return primaryAssigments;
-    }
-
-    public void setPrimaryAssigments(List<Assigment> primaryAssigments) {
-        this.primaryAssigments = primaryAssigments;
-    }
-
-    public List<Assigment> getSecondaryAssigments() {
-        return secondaryAssigments;
-    }
-
-    public void setSecondaryAssigments(List<Assigment> secondaryAssigments) {
-        this.secondaryAssigments = secondaryAssigments;
     }
 
     @Override
