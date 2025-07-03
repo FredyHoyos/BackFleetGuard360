@@ -2,6 +2,7 @@ package com.fleetguard.api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Driver implements UserDetails {
@@ -51,6 +53,12 @@ public class Driver implements UserDetails {
     private Gender sex;
 
     private String photo;
+
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+    private List<Assigment> primaryAssigments;
+
+    @OneToMany(mappedBy = "driver2", cascade = CascadeType.ALL)
+    private List<Assigment> secondaryAssigments;
 
     public Driver() { }
 
@@ -153,6 +161,22 @@ public class Driver implements UserDetails {
         this.email = email;
     }
 
+    public List<Assigment> getPrimaryAssigments() {
+        return primaryAssigments;
+    }
+
+    public void setPrimaryAssigments(List<Assigment> primaryAssigments) {
+        this.primaryAssigments = primaryAssigments;
+    }
+
+    public List<Assigment> getSecondaryAssigments() {
+        return secondaryAssigments;
+    }
+
+    public void setSecondaryAssigments(List<Assigment> secondaryAssigments) {
+        this.secondaryAssigments = secondaryAssigments;
+    }
+
     @Override
     public String getPassword() {
         return password;
@@ -197,4 +221,5 @@ public class Driver implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
