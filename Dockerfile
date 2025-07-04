@@ -1,10 +1,9 @@
 # Fase de construcción (Build)
-FROM maven:3.8.6-eclipse-temurin-17 AS builder
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
-COPY pom.xml .
-# Copia solo los archivos necesarios para resolver dependencias primero (caché eficiente)
-COPY src ./src
+
+COPY . .
 
 # Build del proyecto (generará el .jar en /app/target)
 RUN mvn clean package -DskipTests
@@ -17,6 +16,6 @@ WORKDIR /app
 RUN mkdir -p publica privada refresh_privada refresh_publica
 
 # Copia el .jar desde la fase de construcción
-COPY --from=builder /app/target/api-*.jar /app/api-v1.jar
-
+COPY --from=build /app/target/api-*.jar /app/api-v1.jar
+EXPOSE 8088
 ENTRYPOINT ["java", "-jar", "/app/api-v1.jar"]

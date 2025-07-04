@@ -3,9 +3,35 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'DB_URL=${DB_URL}'
       - 'POSTGRES_DB=${POSTGRES_DB}'
       - 'POSTGRES_PASSWORD=${POSTGRES_PWD}'
       - 'POSTGRES_USER=${POSTGRES_DB_USER}'
     ports:
       - '5433:5432'
+    volumes:
+      - postgres-data:/var/lib/posgres
+  api-v1:
+    build: .
+    ports:
+      - "8090:8090"
+    depends_on:
+      - postgres
+    environment:
+      - 'SPRING_DATASOURCE_USERNAME=${POSTGRES_DB_USER}'
+      - 'SPRING_DATASOURCE_PASSWORD=${POSTGRES_PWD}'
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+volumes:
+  postgres-data:
