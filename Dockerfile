@@ -17,5 +17,5 @@ RUN mkdir -p publica privada refresh_privada refresh_publica
 
 # Copia el .jar desde la fase de construcción
 COPY --from=build /app/target/api-*.jar /app/api-v1.jar
-EXPOSE 8088
+EXPOSE 8090
 ENTRYPOINT ["java", "-jar", "/app/api-v1.jar"]
