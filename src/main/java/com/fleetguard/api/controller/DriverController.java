@@ -6,6 +6,9 @@ import com.fleetguard.api.mapper.DriverMapper;
 import com.fleetguard.api.model.Driver;
 import com.fleetguard.api.repository.DriverRepository;
 import com.fleetguard.api.service.PhotoStorageService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.Resource;
 import jakarta.validation.Valid;
 import org.springframework.core.io.UrlResource;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"})
 
+@Tag(name = "Driver")
 @RestController
 @RequestMapping("/api/driver")
 public class DriverController {
@@ -44,17 +48,32 @@ public class DriverController {
         this.driverMapper = driverMapper;
     }
 
+    @Operation(
+            summary = "Get all drivers",
+            description = "Este endpoint retorna una lista de conductores registrados",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @GetMapping("/all")
     public @ResponseBody Iterable<Driver> getAll() {
         return repository.findAll();
     }
 
+    @Operation(
+            summary = "Register for the drivers",
+            description = "Este endpoint permite registrar a los conductores",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @PostMapping("/register")
     public @ResponseBody Driver createDriver(@Valid @RequestBody DriverDTO newDriver) {
         Driver driver = driverMapper.toModel(newDriver);
         return repository.save(driver);
     }
 
+    @Operation(
+            summary = "Update drivers",
+            description = "Este endpoint permite actualizar a un conductor por el id",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @PutMapping("/{id}")
     public @ResponseBody Driver updateDriver(@PathVariable int id, @Valid @RequestBody DriverDTO newDriver) {
         Driver driver = driverMapper.toModel(newDriver);
@@ -62,6 +81,11 @@ public class DriverController {
         return repository.save(driver);
     }
 
+    @Operation(
+            summary = "Delete drivers",
+            description = "Este endpoint permite eliminar a un conductor por el id",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @DeleteMapping("/{id}")
     public @ResponseBody void deleteDriver(@PathVariable int id) {
         repository.deleteById(id);

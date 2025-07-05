@@ -6,6 +6,8 @@ import com.fleetguard.api.model.Login;
 import com.fleetguard.api.model.SignUp;
 import com.fleetguard.api.model.Token;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Collections;
 
+@Tag(name = "Authentication")
 @CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"})
 @RestController
 @RequestMapping("/api/auth")
@@ -39,6 +42,10 @@ public class AuthController {
     @Qualifier("jwtRefreshTokenAuthProvider")
     JwtAuthenticationProvider refreshTokenAuthProvider;
 
+    @Operation(
+            summary = "Administrator registration",
+            description = "Este endpoint permite registrar a los administradores"
+    )
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody SignUp signupDTO) {
         Administrator admin = new Administrator(signupDTO.getName(), signupDTO.getUsername(), signupDTO.getPassword());
@@ -49,12 +56,20 @@ public class AuthController {
         return ResponseEntity.ok(tokenGenerator.createToken(authentication));
     }
 
+    @Operation(
+            summary = "Administrator login",
+            description = "Este endpoint permite logearse a los administradores"
+    )
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Login loginDTO) {
         Authentication authentication = daoAuthenticationProvider.authenticate(UsernamePasswordAuthenticationToken.unauthenticated(loginDTO.getUsername(), loginDTO.getPassword()));
         return ResponseEntity.ok(tokenGenerator.createToken(authentication));
     }
 
+    @Operation(
+            summary = "Refresh Token",
+            description = "Este endpoint genera los refresh token"
+    )
     @PostMapping("/token")
     public ResponseEntity token(@RequestBody Token tokenDTO) {
         Authentication authentication = refreshTokenAuthProvider.authenticate(new BearerTokenAuthenticationToken(tokenDTO.getRefreshToken()));

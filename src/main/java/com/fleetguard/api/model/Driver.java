@@ -2,6 +2,7 @@ package com.fleetguard.api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Driver implements UserDetails {
@@ -197,4 +199,5 @@ public class Driver implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

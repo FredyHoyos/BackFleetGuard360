@@ -1,0 +1,221 @@
+[
+  {
+    "name": "Jose Fernando Martinez",
+    "username": "josema",
+    "documentType": 3,
+    "documentNumber": "12346547",
+    "rol": "conductor",
+    "address": "Calle 1 #12-34",
+    "birthDate": "1997-09-30",
+    "phoneNumber": "213435657",
+    "email": "email1@gmail.com",
+    "password": "sara123"
+  },
+  {
+    "name": "Laura Vanessa Rojas",
+    "username": "lauraro",
+    "documentType": 3,
+    "documentNumber": "89456123",
+    "rol": "conductor",
+    "address": "Carrera 5 #22-10",
+    "birthDate": "1990-04-15",
+    "phoneNumber": "3214569870",
+    "email": "email2@gmail.com",
+    "password": "laura123"
+  },
+  {
+    "name": "Carlos Andres Gutierrez",
+    "username": "cargut",
+    "documentType": 3,
+    "documentNumber": "45123689",
+    "rol": "conductor",
+    "address": "Calle 45 #15-20",
+    "birthDate": "1988-12-05",
+    "phoneNumber": "3102456789",
+    "email": "email3@gmail.com",
+    "password": "carlos123"
+  },
+  {
+    "name": "Tatiana Jimenez Perez",
+    "username": "tatijime",
+    "documentType": 3,
+    "documentNumber": "56219873",
+    "rol": "conductor",
+    "address": "Avenida 30 #60-12",
+    "birthDate": "1995-07-22",
+    "phoneNumber": "3001234567",
+    "email": "email4@gmail.com",
+    "password": "tati123"
+  },
+  {
+    "name": "Pedro Pablo Salazar",
+    "username": "pepsal",
+    "documentType": 3,
+    "documentNumber": "78546912",
+    "rol": "conductor",
+    "address": "Calle 9 #88-99",
+    "birthDate": "1985-02-10",
+    "phoneNumber": "3019876543",
+    "email": "email5@gmail.com",
+    "password": "pedro123"
+  },
+  {
+    "name": "Sandra Milena Castaño",
+    "username": "sancas",
+    "documentType": 3,
+    "documentNumber": "12348765",
+    "rol": "conductor",
+    "address": "Carrera 20 #45-67",
+    "birthDate": "1992-11-30",
+    "phoneNumber": "3124567890",
+    "email": "email6@gmail.com",
+    "password": "sandra123"
+  },
+  {
+    "name": "Andres Felipe Osorio",
+    "username": "andoso",
+    "documentType": 3,
+    "documentNumber": "99887766",
+    "rol": "conductor",
+    "address": "Diagonal 10 #50-10",
+    "birthDate": "1993-08-12",
+    "phoneNumber": "3139876543",
+    "email": "email7@gmail.com",
+    "password": "andres123"
+  },
+  {
+    "name": "Juliana Torres Mejia",
+    "username": "jultor",
+    "documentType": 3,
+    "documentNumber": "77889900",
+    "rol": "conductor",
+    "address": "Calle 65 #34-22",
+    "birthDate": "1996-03-18",
+    "phoneNumber": "3151234567",
+    "email": "email8@gmail.com",
+    "password": "juliana123"
+  },
+  {
+    "name": "Camilo Ernesto Duque",
+    "username": "camilod",
+    "documentType": 3,
+    "documentNumber": "33445566",
+    "rol": "conductor",
+    "address": "Carrera 40 #12-21",
+    "birthDate": "1991-01-27",
+    "phoneNumber": "3167890123",
+    "email": "email9@gmail.com",
+    "password": "camilo123"
+  },
+  {
+    "name": "Angela Patricia Rivera",
+    "username": "angriv",
+    "documentType": 3,
+    "documentNumber": "11223344",
+    "rol": "conductor",
+    "address": "Transversal 8 #90-20",
+    "birthDate": "1999-06-01",
+    "phoneNumber": "3174567890",
+    "email": "email10@gmail.com",
+    "password": "angela123"
+  },
+  {
+    "name": "David Esteban Vargas",
+    "username": "davidv",
+    "documentType": 3,
+    "documentNumber": "55667788",
+    "rol": "conductor",
+    "address": "Calle 20 #11-45",
+    "birthDate": "1987-05-03",
+    "phoneNumber": "3189876543",
+    "email": "email11@gmail.com",
+    "password": "david123"
+  },
+  {
+    "name": "Marcela Gómez Ruiz",
+    "username": "marceg",
+    "documentType": 3,
+    "documentNumber": "66778899",
+    "rol": "conductor",
+    "address": "Carrera 55 #22-33",
+    "birthDate": "1994-10-10",
+    "phoneNumber": "3198765432",
+    "email": "email12@gmail.com",
+    "password": "marcela123"
+  },
+  {
+    "name": "Jhon Alexander Rincón",
+    "username": "jhonrin",
+    "documentType": 3,
+    "documentNumber": "44556677",
+    "rol": "conductor",
+    "address": "Avenida 1 #1-1",
+    "birthDate": "1990-12-25",
+    "phoneNumber": "3201234567",
+    "email": "email13@gmail.com",
+    "password": "jhon123"
+  }
+]
+
+[
+  {
+    "date": "2018-01-01",
+    "startTime": "06:00",
+    "endTime": "09:00",
+    "route": "Calle 80 - Av. Suba (Bogotá)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "07:30",
+    "endTime": "11:00",
+    "route": "Av. Regional - San Juan (Medellín)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "08:00",
+    "endTime": "12:30",
+    "route": "Autopista Sur - Carrera 7 (Bogotá)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "10:15",
+    "endTime": "13:45",
+    "route": "Av. Roosevelt - Calle 5 (Cali)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "12:00",
+    "endTime": "15:00",
+    "route": "Calle 30 - Carrera 50 (Barranquilla)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "13:30",
+    "endTime": "17:00",
+    "route": "Carrera 1 - Av. El Poblado (Medellín)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "14:00",
+    "endTime": "18:30",
+    "route": "Av. Ciudad de Cali - Calle 26 (Bogotá)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "16:00",
+    "endTime": "19:00",
+    "route": "Calle 13 - Av. Boyacá (Bogotá)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "17:30",
+    "endTime": "20:00",
+    "route": "Carrera 70 - Calle 10 (Medellín)"
+  },
+  {
+    "date": "2018-01-01",
+    "startTime": "18:00",
+    "endTime": "21:15",
+    "route": "Av. 3N - Carrera 8 (Cali)"
+  }
+]

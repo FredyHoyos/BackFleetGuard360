@@ -3,6 +3,9 @@ package com.fleetguard.api.controller;
 import com.fleetguard.api.DTO.AdministratorDTO;
 import com.fleetguard.api.model.Administrator;
 import com.fleetguard.api.repository.AdministratorRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +18,18 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"})
-
+@Tag(name = "Admin")
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
     @Autowired
     AdministratorRepository administratorRepository;
 
+    @Operation(
+            summary = "Get all the admins",
+            description = "Este endpoint retorna una lista con todos los administradores",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @GetMapping("/all")
     public ResponseEntity<List<AdministratorDTO>> getAll() {
         Iterable<Administrator> administrators = administratorRepository.findAll();

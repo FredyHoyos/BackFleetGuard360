@@ -3,9 +3,45 @@ services:
   postgres:
     image: 'postgres:latest'
     environment:
-      - 'DB_URL=${DB_URL}'
       - 'POSTGRES_DB=${POSTGRES_DB}'
       - 'POSTGRES_PASSWORD=${POSTGRES_PWD}'
       - 'POSTGRES_USER=${POSTGRES_DB_USER}'
     ports:
       - '5433:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  api-v1:
+    build: .
+    ports:
+      - "8090:8090"
+    depends_on:
+      - postgres
+    environment:
+      - 'SPRING_DATASOURCE_URL=${POSTGRES_DB_URL_DOCKER}'
+      - 'SPRING_DATASOURCE_USERNAME=${POSTGRES_DB_USER}'
+      - 'SPRING_DATASOURCE_PASSWORD=${POSTGRES_PWD}'
+      - 'PATH_PRIVATE=/app/privada/private_key.pem'
+      - 'PATH_PUBLIC=/app/privada/public_key.pem'
+      - 'PATH_REFRESH_PRIVATE=/app/privada/refresh_private_key.pem'
+      - 'PATH_REFRESH_PUBLIC=/app/privada/refresh_public_key.pem'
+    volumes:
+      - '/home/xaraxx/keys/private_key.pem:/app/privada/private_key.pem:ro'
+      - '/home/xaraxx/keys/public_key.pem:/app/privada/public_key.pem:ro'
+      - '/home/xaraxx/keys/refresh_private_key.pem:/app/privada/refresh_private_key.pem:ro'
+      - '/home/xaraxx/keys/refresh_public_key.pem:/app/privada/refresh_public_key.pem:ro'
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9080:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+volumes:
+  postgres-data:
