@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleetguard-app
+  labels:
+    app: fleetguard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fleetguard
+  template:
+    metadata:
+      labels:
+        app: fleetguard
+    spec:
+      containers:
+        - name: fleetguard-app
+          image: backfleetguard360-api-v1:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgresql:5432/fleetguard-db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-auth
+                  key: POSTGRES_PASSWORD
+            - name: PATH_PRIVATE
+              value: /app/privada/private_key.pem
+            - name: PATH_PUBLIC
+              value: /app/privada/public_key.pem
+            - name: PATH_REFRESH_PRIVATE
+              value: /app/privada/refresh_private_key.pem
+            - name:  PATH_REFRESH_PUBLIC
+              value: /app/privada/refresh_public_key.pem
+          volumeMounts:
+            - name: jwt-keys-volume
+              mountPath: /app/privada
+              readOnly: true
+      volumes:
+        - name: jwt-keys-volume
+          secret:
+            secretName: jwt-keys
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetguard-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: fleetguard
+  type: LoadBalancer
+
+
+      

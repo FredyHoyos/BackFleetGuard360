@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"})
+/* @CrossOrigin(origins = {"http://localhost:3000", "https://front-fleet-guard360.vercel.app"}) */
 @Tag(name = "Admin")
 @RestController
 @RequestMapping("/api/admin")
